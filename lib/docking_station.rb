@@ -1,9 +1,16 @@
 require "./lib/bike"
 
 class DockingStation
+
+attr_reader :bike
+
+  def initialize
+    @bikes = []
+  end
+
   def release_bike
-    fail "No bikes available" unless @bike
-    @bike
+    fail "No bikes available" if @bikes.count < 1
+    @bikes.pop
     #return Bike.new
   end
 
@@ -15,7 +22,8 @@ class DockingStation
 
 
   def dock(bike)
-    @bike = bike
+    fail "Station full" if @bikes.count >= 20
+    @bikes << bike
   end
 
   #the above dock method is actually a intialisze
@@ -31,6 +39,6 @@ class DockingStation
 
   # this will essentially write the bike mtd above
 # on any instances of this class
-attr_reader :bike
+
 
 end
